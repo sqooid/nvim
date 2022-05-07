@@ -28,6 +28,15 @@ vim.cmd [[
     autocmd!
     autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
   augroup end
+
+  augroup _format
+    autocmd!
+    autocmd BufWritePost * lua vim.lsp.buf.format(nil, 1000)
+  augroup end
+
+  augroup _close_tree
+    autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
+  augroup end
 ]]
 
 -- Autoformat

@@ -4,6 +4,7 @@ local term_opts = { silent = true }
 
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
+local command = vim.api.nvim_create_user_command
 
 --Remap space as leader key
 keymap("", "<Space>", "<Nop>", opts)
@@ -60,10 +61,20 @@ keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
+-- Nvim Tree
+keymap("n", "<leader>e", ":NvimTreeToggle", opts)
+
+-- Format
+command("Format", ":lua vim.lsp.buf.format()", {})
+
+-- Telescope
+-- keymap("n", "<leader>ff", ":lua require('telescope.builtin').find_files()<CR>", opts)
+-- keymap("n", "<leader>fg", ":lua require('telescope.builtin').live_grep()<CR>", opts)
+-- keymap("n", "<leader>fb", ":lua require('telescope.builtin').buffers()<CR>", opts)
+
 -- Terminal --
 -- Better terminal navigation
 -- keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 -- keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
-
